@@ -1,0 +1,384 @@
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%    LAYOUT    %%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper, oneside, openany, 12pt]{memoir}
+\usepackage[utf8]{inputenc}					% Sets encoding to UTF-8
+\usepackage[T1]{fontenc}					% Expands font encoding
+\usepackage[english]{babel}					% Sets language to english
+\usepackage{csquotes}						% Correctly typeset quoted texts
+\usepackage{amssymb}						% More mathematical symbols
+\usepackage{kpfonts}						% Changes the font.
+%\usepackage[sc]{mathpazo}					% Changes the font.
+\usepackage{microtype}						% Dark typographic magic that makes the document more readable
+\usepackage{lipsum}							% Easy Lorem ipsum filler text to check layout
+\usepackage{layout}							% Show page layout with \layout
+
+
+%% Linespacing
+%\OnehalfSpacing
+%\DoubleSpacing
+\linespread{1.2}							% Custom linespacing
+
+
+%% Change size of delimeters in vectors and matrices
+% Lower means larger delimeters. Default 5pt
+\delimitershortfall = 5pt
+
+
+%% Page endings
+%\flushbottom
+%\raggedbottom
+\sloppybottom
+
+
+%% Word divition at line endings
+\hyphenation{Lo-rem Ip-sum Zeit-schrift}
+
+
+%% Section counting
+%\counterwithout{section}{chapter}			% Starts counting from sections instead of chapters
+\setsecnumdepth{subsection}					% Numerates subsections
+\settocdepth{subsection}					% Adds subsections to table of contents
+
+
+%% Page styles
+\chapterstyle{tandh}
+\pagestyle{headings}
+\setlength{\headheight}{15.02pt}			% Accented characters in header without \vbox badness warning
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    FIGURES AND TABLES    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx}						% For inserting images
+\usepackage{float}							% Greater control of figure placement
+\usepackage[table]{xcolor}					% Colour different objects in the document
+\usepackage{tikz}							% Draw figures with code
+\usetikzlibrary{arrows,decorations.pathmorphing}
+\usepackage{array}							% More flexible column formatting
+\usepackage{booktabs}						% More options with tables
+\usepackage{longtable}						% Provides tabulars that can split across pages
+\usepackage{tabularx}						% Define tabularx enviroment with different spacing from tabular
+\usepackage{dcolumn}						% Creates columns which align on a decimal marker
+\usepackage{multirow}						% Lets tabular material span multiple rows.
+
+
+%% Folder with figures
+\graphicspath{{./Figures/}}
+
+
+%% Caption settings
+\captionnamefont{\bfseries}
+%\changecaptionwidth
+%\captionwidth{0.9\textwidth}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    NEW COMMANDS    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{etoolbox}						% Provides generic programming facilities 
+\usepackage{mathtools}						% Expands mathematical features. Contains amsmath
+\usepackage{xparse}							% More options for new commands
+\usepackage{xspace}							% Allows automatic spacing after macros
+\usepackage{siunitx}						% Physical units
+\usepackage{bm}								% More options for bold math symbols
+\usepackage[normalem]{ulem}					% More abilities for underlining and crossing-out
+\usepackage{verbatim}						% Prints everything in text including latex commands
+
+
+%% Mathematical set symbols
+\newcommand{\C}{\mathbb{C}}					% Complex
+\newcommand{\N}{\mathbb{N}}					% Natural
+\newcommand{\Q}{\mathbb{Q}}					% Rational
+\newcommand{\R}{\mathbb{R}}					% Real
+\newcommand{\Z}{\mathbb{Z}}					% Integer
+
+
+%% Math operators
+\DeclareMathOperator{\e}{e}					% Exponential e
+\DeclareMathOperator{\differential}{d}		% Differential d
+\DeclareMathOperator{\Imag}{Im}				% Imaginary paert
+\DeclareMathOperator{\Real}{Re}				% Real part
+\DeclareMathOperator{\sgn}{sgn}				% Sign function
+\DeclareMathOperator{\Id}{Id}				% Identity function
+\DeclareMathOperator{\arcosh}{arcosh}		% Inverse hyperbolic cosine
+\DeclareMathOperator{\arsinh}{arsinh}		% Inverse hyperbolic sine
+\DeclareMathOperator{\artanh}{artanh}		% Inverse hyperbolic tangent
+\DeclareMathOperator{\Mat}{Mat}				% Matrix
+\DeclareMathOperator{\tr}{tr}				% Trace
+\DeclareMathOperator{\Arg}{Arg}				% Principal argument
+\DeclareMathOperator{\Res}{Res}				% Residue
+\DeclareMathOperator{\Geo}{Geo}				% Geometric
+\DeclareMathOperator{\Alg}{Alg}				% Algebraic
+\DeclareMathOperator{\ord}{ord}				% Order
+\DeclareMathOperator{\diag}{diag}			% Diagonal
+\DeclareMathOperator{\interior}{int}		% Interioir
+
+
+%% Paired delimeters
+\DeclarePairedDelimiter{\mean}{\langle}{\rangle}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\bra}{\langle}{\rvert}
+\DeclarePairedDelimiter{\ket}{\lvert}{\rangle}
+\DeclarePairedDelimiterX{\braket}[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+\DeclarePairedDelimiterX{\sandwich}[3]{\langle}{\rangle}{#1 \delimsize\vert #2 \delimsize\vert #3}
+\DeclarePairedDelimiterX{\inner}[2]{\langle}{\rangle}{#1, #2}
+
+
+%% Calculus
+\NewDocumentCommand{\diff}{O{} m}{{\differential}^{#1} \mkern-1mu #2}	% Spacing after d is half a \!
+\NewDocumentCommand{\difffrac}{O{} m m}{\frac{\diff[#1]{#2}}{\diff{#3}^{#1}}}
+\NewDocumentCommand{\partfrac}{O{} m m}{\frac{\partial^{#1}{#2}}{\partial{#3}^{#1}}}
+\NewDocumentCommand{\integral}{O{} O{} O{} m}{\int_{#1}^{#2} \diff[#3]{#4} \;}
+
+
+%% Vectors
+\renewcommand{\vec}[1]{\bm{\mathrm{#1}}}	% Bold and upright vectors without arrow
+\newcommand{\uvec}[1]{\hat{\vec{#1}}}		% Unit vector
+
+
+%% Augmented coefficient matrices without using arrays
+% This is useful for writing linear system of equations in matrix form
+% Comes from: https://tex.stackexchange.com/questions/2233/
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+%% Extra delimeter size
+% In kpfonts, the jump from ( to \big( is very noticable
+% This gives an extra step \mbigl( \mbigr)
+% Works for all delimeters
+% Comes from: http://tex.stackexchange.com/q/183477/3929
+\newlength\axisht
+\setlength{\axisht}{\dimexpr.5\ht\strutbox-.5\dp\strutbox}
+\def\scalemathaxis#1#2{\raisebox{\dimexpr\axisht-#1\axisht}{\scalebox{#1}{$#2$}}}
+\newcommand\mbigl[1]{\mathopen{\scalemathaxis{0.8}{\big#1}}}
+\newcommand\mbigr[1]{\mathclose{\scalemathaxis{0.8}{\big#1}}}
+
+
+
+%% TODO: Fix this and turn it into useful commands
+\newcommand\vdelim[4][\displaystyle]{
+  \setbox0=\hbox{$#1#3$}
+  \setbox1=\hbox{$\vcenter{\copy0}$}
+  \raisebox{\dimexpr\ht0-\ht1}{$#1\left#2\copy1\right#4$}
+}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    MATHEMATICAL THEOREMS    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsthm}							% For making mathematical theorems
+
+
+%% Theorem enviroment styles
+% Make theorem titles bold (personal preference)
+\makeatletter
+\def\th@plain{%
+	\thm@notefont{}		% Same as heading font
+	\itshape 			% Body font
+}
+\def\th@definition{%
+	\thm@notefont{}		% Same as heading font
+	\normalfont 		% Body font
+}
+\makeatother
+
+
+%% Define theorem enviroment names
+% If the danish option in the babel package is loaded, define Danish theorem names
+% Otherwise define English theorem names
+% All theorem names and styles are taken from the amsthm documentation
+\makeatletter
+\@ifpackagewith{babel}{danish}{
+	\theoremstyle{plain}
+	\newtheorem{theorem}{Sætning}[chapter]
+	\newtheorem{lemma}[theorem]{Lemma}
+	\newtheorem{corollary}[theorem]{Korollar}
+	\newtheorem{proposition}[theorem]{Proposition}
+	\newtheorem{conjecture}[theorem]{Formodning}
+	\newtheorem{criterion}[theorem]{Kriterie}
+	\newtheorem{assertion}[theorem]{Assertion}
+	
+	\theoremstyle{definition}
+	\newtheorem{definition}[theorem]{Definition}
+	\newtheorem{condition}[theorem]{Betingelse}
+	\newtheorem{problem}[theorem]{Problem}
+	\newtheorem{example}[theorem]{Eksempel}
+	\newtheorem{exercise}{Øvelse}[chapter]
+	\newtheorem{algorithm}[theorem]{Algoritme}
+	\newtheorem{question}[theorem]{Spørgsmål}
+	\newtheorem{axiom}[theorem]{Aksiom}
+	\newtheorem{property}[theorem]{Egenskab}
+	\newtheorem{assumption}[theorem]{Antagelse}
+	\newtheorem{hypothesis}[theorem]{Hypotese}
+	
+	\theoremstyle{remark}
+	\newtheorem{remark}[theorem]{Bemærkning}
+	\newtheorem{note}[theorem]{Note}
+	\newtheorem{notation}[theorem]{Notation}
+	\newtheorem{claim}[theorem]{Påstand}
+	\newtheorem{summary}[theorem]{Resumé}
+	\newtheorem{acknowledgment}[theorem]{Anerkendelse}
+	\newtheorem{case}[theorem]{Tilfælde}
+	\newtheorem{conclusion}[theorem]{Konklusion}
+}{
+	\theoremstyle{plain}
+	\newtheorem{theorem}{Theorem}[chapter]
+	\newtheorem{lemma}[theorem]{Lemma}
+	\newtheorem{corollary}[theorem]{Corollary}
+	\newtheorem{proposition}[theorem]{Proposition}
+	\newtheorem{conjecture}[theorem]{Conjecture}
+	\newtheorem{criterion}[theorem]{Criterion}
+	\newtheorem{assertion}[theorem]{Assertion}
+	
+	\theoremstyle{definition}
+	\newtheorem{definition}[theorem]{Definition}
+	\newtheorem{condition}[theorem]{Condition}
+	\newtheorem{problem}[theorem]{Problem}
+	\newtheorem{example}[theorem]{Example}
+	\newtheorem{exercise}{Exercise}[chapter]
+	\newtheorem{algorithm}[theorem]{Algorithm}
+	\newtheorem{question}[theorem]{Question}
+	\newtheorem{axiom}[theorem]{Axiom}
+	\newtheorem{property}[theorem]{Property}
+	\newtheorem{assumption}[theorem]{Assumption}
+	\newtheorem{hypothesis}[theorem]{Hypothesis}
+	
+	\theoremstyle{remark}
+	\newtheorem{remark}[theorem]{Remark}
+	\newtheorem{note}[theorem]{Note}
+	\newtheorem{notation}[theorem]{Notation}
+	\newtheorem{claim}[theorem]{Claim}
+	\newtheorem{summary}[theorem]{Summary}
+	\newtheorem{acknowledgment}[theorem]{Acknowledgment}
+	\newtheorem{case}[theorem]{Case}
+	\newtheorem{conclusion}[theorem]{Conclusion}
+}
+\makeatother
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    MARGIN NOTES    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[draft]{fixme}					% Notes in the margin
+
+
+%% FiXme notes layout
+\renewcommand{\fixmelogo}{}					% Removes the FiXme logo from notes
+\fxsetup{
+	layout=margin,
+	marginface=\scriptsize,					% In honour of Pierre Fermat
+	theme=color,
+}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    REFERENCES AND BIBLIOGRAPHY    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[
+	backend=biber,
+	sorting=none,
+	url=false
+]{biblatex}									% Uses biber instead of BibLaTeX
+\usepackage{lastpage}						% Reference to last page
+\usepackage{makeidx}						% Create index list
+\usepackage[hidelinks]{hyperref}			% Hyperlinks in the document
+\usepackage[nameinlink]{cleveref}			% Better referencing system
+
+
+%% Biblography file
+\bibliography{BachelorBibliography}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    DOCUMENT    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% For the front page
+\newcommand{\projecttitle}{Project Title}
+\newcommand{\projectauthor}{Author's Name}
+\newcommand{\projectauthorID}{Author's ID}
+\newcommand{\projectsupervisor}{Supervisor's Name}
+\newcommand{\projectdate}{Date}
+\newcommand{\projectdepartment}{Department}
+\newcommand{\projectuniversity}{University}
+\newcommand{\projectfrontpagefigure}{File Name of Figure}	% Toogle display in 'Frontpage' file
+
+
+%% Project specific commands
+\newcommand{\LP}{\mathrm{LP}}				% Lower polariton
+\newcommand{\UP}{\mathrm{UP}}				% Upper polariton
+\newcommand{\gs}{\ket{0}}					% Ground state
+\newcommand{\FS}{\ket{\mathrm{FS}}}			% Fermi sea wave function
+\newcommand{\BCS}{\ket{\mathrm{BCS}}}		% BCS ground state
+\newcommand{\hc}{\mathrm{h.c.}}				% Hermitian conjugate
+\newcommand{\spinup}{\uparrow}				% More natural spin up command
+\newcommand{\spindown}{\downarrow}			% More natural spin down command
+
+
+%% Begin Document
+\begin{document}
+	
+%	\layout							% Insert page displaying document layout
+	
+	\frontmatter
+	\input{Frontpage}
+%	\listoffixmes					% Prints nothing if there are no FiXme notes
+	\tableofcontents
+	
+	% Add blanc page af ToC
+	\newpage
+	\null
+	\thispagestyle{empty}
+	\addtocounter{page}{-1}
+	\newpage
+	
+	
+	\mainmatter
+	\input{Content}
+	
+	
+	\printbibliography
+	
+\end{document}

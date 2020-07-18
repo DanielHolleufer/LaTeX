@@ -1,0 +1,69 @@
+%!TEX root = Bachelor.tex
+
+% All names are defined in the preamble
+
+\begin{titlingpage}
+
+	\begin{center}
+		
+		
+		\fontsize{26pt}{29pt}\selectfont
+		
+		\textsc{\projecttitle} \par
+		
+		\vspace{0.75cm}
+		
+		\fontsize{18pt}{21pt}\selectfont
+		
+		\projectauthor \par
+		\projectauthorID \par
+		
+		\vspace{0.5cm}
+		Bachelor's Project \par
+		\vspace{1.5cm}
+		\vfill
+		
+		%\includegraphics[width=6cm]{\projectfrontpagefigure}
+		
+		\vspace{1.25cm}
+
+		% Draw figure with tikz
+		\begin{tikzpicture}[remember picture, overlay]
+			\draw[domain=-15:15, smooth, variable=\x, blue, ultra thick] plot ({\x},{\x/4+sqrt(\x*\x+4)/4});
+			\draw[domain=-15:15, smooth, variable=\x, red, ultra thick] plot ({\x},{\x/4-sqrt(\x*\x+4)/4});
+		\end{tikzpicture}
+		\vfill
+		
+		\fontsize{18pt}{21pt}\selectfont
+		\vspace{3cm}
+		Supervisor: \projectsupervisor \par
+		
+		\vspace{0.5cm}
+		
+		\fontsize{14pt}{17pt}\selectfont
+		
+		\textsc{\projectdepartment} \par
+		\textsc{\projectuniversity} \par
+		
+		\vspace{0.5cm}
+		
+		\projectdate
+	\end{center}
+	
+	% Insert logo and sigil
+	\vfill
+	\noindent
+	\includegraphics{Logo_Department_en}	% Filename for department/university logo.
+	\hfill
+	\includegraphics{segla1b}				% Filename for department/university sigil. Remove if no sigil.
+
+\end{titlingpage}
+
+
+% Add blank page so that printing on both sides doesn't 
+% print anything on the back of the front page.
+\newpage
+\null
+\thispagestyle{empty}
+\addtocounter{page}{-1}
+\newpage
