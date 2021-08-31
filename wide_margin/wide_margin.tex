@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%    DOCUMENT LAYOUT    %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For approximately 2400 characters per page set
+% Fontsize = 12pt
+% SingleSpace = 1.12
+%
+% For approximately 3600 characters per page set
+% Fontsize = 10pt
+% SingleSpace = 1.10
+
+
+%% Documentclass
+\documentclass[a4paper, openany, 12pt]{memoir}
+\usepackage{layout}
+
+
+%% Language, encoding, and common symbols
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}		% Mathematical symbols
+
+% Word hyphenation
+\hyphenation{}
+
+
+%% Fonts
+% For more font inspiration, see: https://tex.stackexchange.com/questions/59702/suggest-a-nice-font-family-for-my-basic-latex-template-text-and-math
+% For an extensive font catalogue, see: https://www.tug.org/FontCatalogue/
+%\usepackage{lmodern}
+%\usepackage{kpfonts}
+%\usepackage[sc]{mathpazo}
+%\usepackage{fourier}
+\usepackage{libertine, libertinust1math}
+%\usepackage{newpxtext, newpxmath}
+%\usepackage{microtype}
+
+
+%% Margins and widths
+\setlrmarginsandblock{2.5cm}{8cm}{*}
+\setulmarginsandblock{3cm}{4cm}{*}
+\marginparsep = 0.5cm
+\marginparwidth = 6.5cm
+\setlength{\headwidth}{\textwidth}
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+
+
+%% Pagestyle
+\usepackage{etoolbox}
+\makepagestyle    {wmargin}
+\makerunningwidth {wmargin}{\headwidth}
+\makeheadposition {wmargin}{flushright}{flushleft}{flushright}{flushleft}
+\makeoddhead      {wmargin}{}{}{\itshape\rightmark\normalfont \qquad \thepage}
+\makeevenhead     {wmargin}{\thepage \qquad \itshape\leftmark}{}{}
+\makeoddfoot      {wmargin}{}{}{}
+\makeevenfoot     {wmargin}{}{}{}
+\makeheadrule     {wmargin}{\headwidth}{0pt}
+\makefootrule     {wmargin}{\headwidth}{0pt}{\footruleskip}
+\makeatletter
+\makepsmarks{wmargin}{
+	\nouppercaseheads
+	\createmark      {chapter}{left}{shownumber}{\@chapapp\ }{. \ }
+	\createmark      {section}{right}{shownumber}{}{. \ }
+	\createplainmark {toc}{both}{\contentsname}
+	\createplainmark {lof}{both}{\listfigurename}
+	\createplainmark {lot}{both}{\listtablename}
+	\createplainmark {bib}{both}{\bibname}
+	\createplainmark {index}{both}{\indexname}
+	\createplainmark {glossary}{both}{\glossaryname}
+}
+\makeatother
+
+\pagestyle{wmargin}
+
+
+%% Chapterstyle
+% Work in progress
+\usepackage{color}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{tcolorbox}
+\makeatletter
+\makechapterstyle{wmarginchap}{
+	\setlength{\beforechapskip}{0pt}
+	\setlength{\midchapskip}{0pt}
+	\setlength{\afterchapskip}{60pt}
+	\renewcommand*{\afterchapternum}{}
+	\renewcommand*{\chapnamefont}{}
+	\renewcommand*{\chapnumfont}{\bfseries}
+%	\renewcommand*{\chaptitlefont}{
+%		\checkoddpage
+%		\ifoddpage\flushright\Huge\bfseries
+%		\else\flushleft\Huge\bfseries
+%		\fi}
+	\renewcommand*{\chaptitlefont}{\Huge\bfseries}
+%	\renewcommand*{\printchaptername}{\chapnamefont\@chapapp}
+	\renewcommand*{\printchaptername}{}
+	\renewcommand*{\printchapternum}{
+		\marginpar{
+			\centering
+			\makebox[0pt]{
+				\resizebox{!}{2cm}{\chapnumfont\thechapter}
+			}
+		}	
+	}
+	\makeoddfoot{plain}{}{}{\thepage}
+	\makeevenfoot{plain}{\thepage}{}{}
+	\renewcommand*{\printchaptertitle}[1]{
+		\checkoddpage
+		\ifoddpage
+			\flushright
+			\begin{vplace}[1]
+				\chaptitlefont##1
+			\end{vplace}
+		\else
+			\flushleft
+			\begin{vplace}[1]
+				\chaptitlefont##1
+			\end{vplace}
+		\fi
+	}
+}
+\makeatother
+%\chapterstyle{wmarginchap}
+
+
+%% Chapter TOC in margin
+\usepackage{titlesec}
+\usepackage{titletoc}
+\titlecontents{psection}[2em]{}
+	{\contentslabel{2em}}{}
+	{\titlerule*[0.5pc]{.}\contentspage}
+\titlecontents{psubsection}[5.5em]{}
+	{\contentslabel{3.2em}}{}
+	{\titlerule*[1pc]{.}\contentspage}
+
+\newcommand*{\chaptertoc}{
+	\startcontents[chapters]
+	\marginpar{\footnotesize\printcontents[chapters]{p}{1}[1]{}}
+	\vspace{-2.5em}
+}
+
+
+%% Linespacing
+\setSingleSpace{1.12}
+\SingleSpacing
+\setFloatSpacing{1.05}
+\checkandfixthelayout
+\strictpagecheck
+\usepackage{lipsum}
+\usepackage{blindtext}
+\usepackage{pdfpages}
+\usepackage{float}
+\begin{document}
+	\mainmatter
+	\chapter{I Need This to be a Long Chapter Title}
+	\chaptertoc
+	\section{First Section}
+	\lipsum[1-6]
+	\section{Second Section}
+	\lipsum[1-6]
+	\section{Third Section}
+	\lipsum[1-6]
+
+
+	\chapter{Title}
+	\chaptertoc
+	\section{A Section}
+	\lipsum
+\end{document}
