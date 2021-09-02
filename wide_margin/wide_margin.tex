@@ -20,6 +20,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
 \usepackage{amssymb}		% Mathematical symbols
+\usepackage{csquotes}
 
 % Word hyphenation
 \hyphenation{}
@@ -34,7 +35,7 @@
 %\usepackage{fourier}
 \usepackage{libertine, libertinust1math}
 %\usepackage{newpxtext, newpxmath}
-%\usepackage{microtype}
+\usepackage{microtype}
 
 
 %% Margins and widths
@@ -42,9 +43,14 @@
 \setulmarginsandblock{3cm}{4cm}{*}
 \marginparsep = 0.5cm
 \marginparwidth = 6.5cm
+\setmarginnotes{\marginparsep}{\marginparwidth}{0pt}
 \setlength{\headwidth}{\textwidth}
 \addtolength{\headwidth}{\marginparsep}
 \addtolength{\headwidth}{\marginparwidth}
+\setlength{\footmarkwidth}{0pt}
+\setlength{\footmarksep}{0pt}
+\footnotesinmargin
+\sideparmargin{outer}
 
 
 %% Pagestyle
@@ -71,7 +77,6 @@
 	\createplainmark {glossary}{both}{\glossaryname}
 }
 \makeatother
-
 \pagestyle{wmargin}
 
 
@@ -152,16 +157,16 @@
 \strictpagecheck
 \usepackage{lipsum}
 \usepackage{blindtext}
-\usepackage{pdfpages}
 \usepackage{float}
 \begin{document}
 	\mainmatter
 	\chapter{I Need This to be a Long Chapter Title}
 	\chaptertoc
 	\section{First Section}
-	\lipsum[1-6]
+	\lipsum[2]
 	\section{Second Section}
-	\lipsum[1-6]
+	\lipsum[1-6]\footnote{This is a footnote.}
+
 	\section{Third Section}
 	\lipsum[1-6]
 
