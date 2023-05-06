@@ -1,0 +1,8 @@
+\documentclass[a4paper]{article}
+\usepackage{tikz}
+\begin{document}
+	\thispagestyle{empty}
+	\begin{tikzpicture}[remember picture, overlay]
+		\draw[step=6mm, line cap=rect, shift={(current page.north west)}, lightgray, ultra thin] (0, 0) grid (current page.south east);
+	\end{tikzpicture}
+\end{document}
