@@ -1,0 +1,10 @@
+\documentclass[a4paper]{article}
+\usepackage{tikz}
+\begin{document}
+	\thispagestyle{empty}
+	\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}]
+        \foreach \x in {0.25,0.75,...,21}
+        \foreach \y in {-0.25,-0.75,...,-30}
+        \fill[lightgray] (\x, \y) circle(.02);
+	\end{tikzpicture}
+\end{document}

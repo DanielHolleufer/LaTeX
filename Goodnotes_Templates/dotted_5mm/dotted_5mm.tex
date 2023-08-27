@@ -1,0 +1,12 @@
+\documentclass[a4paper]{article}
+\usepackage{tikz}
+\begin{document}
+	\thispagestyle{empty}
+	\begin{tikzpicture}[remember picture, overlay, shift={(current page.north west)}]
+        \foreach \x in {0.5,1.0,...,20.5}
+        \foreach \y in {-0.5,-1.0,...,-30}
+        \fill[lightgray] (\x, \y) circle(.02);
+        
+		%\draw(0, 0) dot (current page.south east);
+	\end{tikzpicture}
+\end{document}
